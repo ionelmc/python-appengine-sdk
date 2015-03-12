@@ -6,6 +6,7 @@ import urllib
 import shutil
 import zipfile
 import sys
+import os
 
 
 SDK_FILENAME = 'google_appengine_{}.zip'
@@ -54,10 +55,16 @@ def get_latest():
 
 
 if __name__ == "__main__":
+    if not exists(SDK_CACHE):
+        os.mkdir(SDK_CACHE)
+
     if exists(SRC_PATH):
         shutil.rmtree(SRC_PATH)
+
     shutil.copytree(SHIM_PATH, SRC_PATH)
+
     unpack(*get_latest())
+
     if len(sys.argv) > 1:
         build_number = int(sys.argv[1])
     else:
