@@ -1,0 +1,7 @@
+graft src
+graft fixups
+
+include README.rst
+include tox.ini
+
+global-exclude *.py[co] __pycache__ *.so *.pyd
