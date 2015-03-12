@@ -27,7 +27,7 @@ class Build(build):
         build.run(self)
         self.copy_file(
             join(dirname(__file__), 'src', 'appengine-sdk.pth'),
-            join(self.build_lib, 'src', 'appengine-sdk.pth')
+            join(self.build_lib, 'appengine-sdk.pth')
         )
 
 
