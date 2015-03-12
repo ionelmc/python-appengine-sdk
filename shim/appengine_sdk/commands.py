@@ -4,7 +4,7 @@ def make_shim(script):
         global __name__
         global __file__
 
-        __file__ = join(dirname(__file__), script)
+        __file__ = join(dirname(__file__), "google_appengine", script)
         __name__ = "__main__"
 
         execfile(__file__, globals(), globals())

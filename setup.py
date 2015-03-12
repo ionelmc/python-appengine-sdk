@@ -4,16 +4,14 @@ from __future__ import absolute_import, print_function
 
 import io
 import os
-import re
 from glob import glob
 from os.path import basename
 from os.path import dirname
 from os.path import join
-from os.path import relpath
 from os.path import splitext
-
 from setuptools import find_packages
 from setuptools import setup
+from distutils.command.build import build
 import yaml
 
 
@@ -24,9 +22,21 @@ def read(*names, **kwargs):
     ).read()
 
 
+class Build(build):
+    def run(self):
+        build.run(self)
+        self.copy_file(
+            join(dirname(__file__), 'src', 'appengine-sdk.pth'),
+            join(self.build_lib, 'src', 'appengine-sdk.pth')
+        )
+
+
 setup(
     name='appengine-sdk',
-    version=yaml.load(read(join('src', 'google_appengine', 'VERSION')))['release'],
+    version='{}+{}'.format(
+        yaml.load(read('src', 'appengine_sdk', 'google_appengine', 'VERSION'))['release'],
+        read('src', 'appengine-sdk.build'),
+    ),
     maintainer='Ionel Cristian Maries',
     maintainer_email='contact@ionelmc.ro',
     description='Un-official `pip install`-able AppEngine SDK.',
@@ -59,9 +69,12 @@ setup(
 
     entry_points={
         'console_scripts': [
-            'remote_api_shell = google_appengine.shim:remote_api_shell',
-            'appcfg = google_appengine.shim:appcfg',
-            'dev_appserver = google_appengine.shim:dev_appserver',
+            'remote_api_shell = appengine_sdk.commands:remote_api_shell',
+            'appcfg = appengine_sdk.commands:appcfg',
+            'dev_appserver = appengine_sdk.commands:dev_appserver',
         ]
     },
+    cmdclass={
+        'build': Build
+    }
 )
