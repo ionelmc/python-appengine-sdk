@@ -28,9 +28,10 @@ def open_sdk(version, checksum):
         urllib.urlretrieve(url, path)
 
     with open(path, 'rb') as fp:
-        print("Checking checsum for {} ...".format(path))
+        print("Checking checksum for {} ...".format(path))
         sha1sum = hashlib.sha1(fp.read()).hexdigest()
     assert sha1sum == checksum
+    print("Checksum OK.")
 
     return open(path, 'rb')
 
