@@ -33,7 +33,7 @@ class Build(build):
 
 setup(
     name='appengine-sdk',
-    version='{}+{}'.format(
+    version='{}-{}'.format(
         yaml.load(read('src', 'appengine_sdk', 'google_appengine', 'VERSION'))['release'],
         read('src', 'appengine-sdk.build'),
     ),
