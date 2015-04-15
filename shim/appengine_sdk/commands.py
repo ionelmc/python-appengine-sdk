@@ -5,7 +5,9 @@ def make_shim(script):
         global __file__
         global __path__
 
-        sdk_root = os.environ['GAE_SDK_ROOT'] = os.path.join(os.path.dirname(__file__), "google_appengine")
+        sdk_root = os.path.join(os.path.dirname(__file__), "google_appengine")
+        if 'GAE_SDK_ROOT' not in os.environ:
+            os.environ['GAE_SDK_ROOT'] = sdk_root
         __file__ = os.path.join(sdk_root, script)
         __name__ = "__main__"
         del os, sdk_root
