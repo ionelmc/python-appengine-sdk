@@ -1,11 +1,14 @@
 def make_shim(script):
     def main():
-        from os.path import join, dirname
+        import os
         global __name__
         global __file__
+        global __path__
 
-        __file__ = join(dirname(__file__), "google_appengine", script)
+        sdk_root = os.environ['GAE_SDK_ROOT'] = os.path.join(os.path.dirname(__file__), "google_appengine")
+        __file__ = os.path.join(sdk_root, script)
         __name__ = "__main__"
+        del os, sdk_root
 
         execfile(__file__, globals(), globals())
     return main
