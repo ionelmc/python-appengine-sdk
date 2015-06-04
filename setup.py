@@ -40,7 +40,7 @@ setup(
     maintainer='Ionel Cristian Maries',
     maintainer_email='contact@ionelmc.ro',
     description='Un-official `pip install`-able AppEngine SDK.',
-    long_description=read('README.rst'),
+    long_description=read('README.rst').split('-----')[0],
     keywords='google appengine gae sdk',
     url='https://github.com/ionelmc/python-appengine-sdk',
     classifiers=[
