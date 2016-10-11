@@ -47,7 +47,7 @@ def unpack(version, checksum):
 
 
 def get_latest():
-    page = urllib.urlopen('https://cloud.google.com/appengine/downloads').read()
+    page = urllib.urlopen('https://cloud.google.com/appengine/docs/python/download').read()
     match = SDK_URL_RE.search(page)
     assert match, "SDK url not found in {!r:.100}".format(page)
     print("Got latest version {}".format(match.groupdict()))
