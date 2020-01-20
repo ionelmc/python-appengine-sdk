@@ -57,8 +57,6 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.7',
         'Environment :: Web Environment',
         'License :: OSI Approved :: MIT License',
         'Topic :: Internet :: WWW/HTTP',
