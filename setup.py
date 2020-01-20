@@ -30,12 +30,17 @@ class Build(build):
             join(self.build_lib, 'appengine-sdk.pth')
         )
 
+buildno = read('src', 'appengine-sdk.build')
+if buildno != '0':
+    version_suffix = '-{}'.format(buildno)
+else:
+    version_suffix = ''
 
 setup(
     name='appengine-sdk',
-    version='{}-{}'.format(
+    version='{}{}'.format(
         yaml.load(read('src', 'appengine_sdk', 'google_appengine', 'VERSION'))['release'],
-        read('src', 'appengine-sdk.build'),
+        version_suffix,
     ),
     maintainer='Ionel Cristian Maries',
     maintainer_email='contact@ionelmc.ro',
@@ -52,6 +57,8 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.7',
         'Environment :: Web Environment',
         'License :: OSI Approved :: MIT License',
         'Topic :: Internet :: WWW/HTTP',
